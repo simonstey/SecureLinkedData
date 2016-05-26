@@ -176,6 +176,18 @@ public abstract class DataTier implements IDataTier {
 		System.setProperty("queryKeyPath", queryKeyPath);
 		initParameters();
 	}
+	
+	public void initDummyDecParameters(String method, String keyPath,
+			String hashingIter, String inPath, String outPath, String queryKeyPath) {
+
+		System.setProperty("method", method);
+		System.setProperty("keyPath", keyPath);
+		System.setProperty("hashingIter", hashingIter);
+		System.setProperty("inPath", inPath);
+		System.setProperty("outPath", outPath);
+		System.setProperty("queryKeyPath", queryKeyPath);
+		initParameters();
+	}
 
 	@Override
 	public void initParameters() {
@@ -359,12 +371,21 @@ public abstract class DataTier implements IDataTier {
 
 		return keyGen.generateKey(queryKeyPath);
 	}
+	
+
+	public CipherParameters keyGen(CipherParameters privateKey, Element[] y, String[] query) {
+		FESecretKeyGenerator keyGen = new FESecretKeyGenerator();
+		keyGen.init(new IPLOSTW10SecretKeyGenerationParameters(
+				(IPLOSTW10MasterSecretKeyParameters) privateKey, y));
+
+		return keyGen.generateKey(queryKeyPath, query);
+	}
 
 	@Override
 	public CipherParameters loadQueryKey(String queryKeyPath) {
 		Path secretKeyPath = Paths.get(queryKeyPath);
 
-		Path path = Paths.get(secretKeyPath.getParent().toString(),
+		Path path = Paths.get(getKeyPath(),
 				"pairing.properties");
 		byte[] data;
 		try {
@@ -379,6 +400,12 @@ public abstract class DataTier implements IDataTier {
 			PairingStreamReader skStreamParser = new PairingStreamReader(p,
 					secretKeyData, 0);
 
+			query[0] = skStreamParser.readString();
+			query[1] = skStreamParser.readString();
+			query[2] = skStreamParser.readString();
+			
+			System.out.println("Query was: "+query[0]+" "+query[1]+" "+query[2]);
+			
 			Element g1 = skStreamParser.readG1Element();
 			int n1 = skStreamParser.readInt();
 

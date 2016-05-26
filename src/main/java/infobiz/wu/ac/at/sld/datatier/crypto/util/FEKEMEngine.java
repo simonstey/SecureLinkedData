@@ -15,9 +15,7 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 
-/**
- * @author Angelo De Caro (jpbclib@gmail.com)
- */
+
 public class FEKEMEngine extends IPLOSTW10KEMEngine {
 
 	private int n;
@@ -69,7 +67,7 @@ public class FEKEMEngine extends IPLOSTW10KEMEngine {
 			Instant start = Instant.now();
 			Element M = pairing.getGT().newRandomElement();
 
-			// Encrypt the massage under the specified attributes
+			// Encrypt the message under the specified attributes
 			FEEncryptionParameters encKey = (FEEncryptionParameters) key;
 			FEPublicKeyParameters pub = (FEPublicKeyParameters) encKey.getPublicKey();
 

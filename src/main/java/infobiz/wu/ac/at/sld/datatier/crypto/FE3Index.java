@@ -290,18 +290,20 @@ public class FE3Index extends DataTier {
 
 		if (query[0] == null && query[1] == null && query[2] == null) {
 			privKey = loadQueryKey(queryKeyPath);
+			secretKeyMap.put(query[1],privKey);
 		} else {
 
 			if (query[1].contains("|")) {
 				for (String p : Arrays.asList(query[1].split("\\|"))) {
 					secretKeyMap.put(p, keyGen(keyPair.getPrivate(),
-							createPredicateVectorForQuery(keyPair.getPrivate(), query[0], p, query[2])));
+							createPredicateVectorForQuery(keyPair.getPrivate(), query[0], p, query[2]), query));
 				}
 			} else {
 				privKey = keyGen(keyPair.getPrivate(),
-						createPredicateVectorForQuery(keyPair.getPrivate(), query[0], query[1], query[2]));
+						createPredicateVectorForQuery(keyPair.getPrivate(), query[0], query[1], query[2]), query);
 				secretKeyMap.put(query[1], privKey);
 			}
+
 
 		}
 

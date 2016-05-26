@@ -4,7 +4,9 @@ package infobiz.wu.ac.at.sld.policytier.crypto.util;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
+import it.unisa.dia.gas.plaf.jpbc.pairing.parameters.PropertiesParameters;
 
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 public class CPABESerializeUtils {
@@ -85,10 +87,10 @@ public class CPABESerializeUtils {
 		offset = unserializeString(b, offset, sb);
 		pub.pairingDesc = sb.substring(0);
 	
-//		PropertiesParameters params = new PropertiesParameters()
-//				.load(new ByteArrayInputStream(pub.pairingDesc.getBytes()));
-//		pub.p = PairingFactory.getPairing(params);
-		pub.p=PairingFactory.getPairing("params/curves/a.properties");
+		PropertiesParameters params = new PropertiesParameters()
+				.load(new ByteArrayInputStream(pub.pairingDesc.getBytes()));
+		pub.p = PairingFactory.getPairing(params);
+//		pub.p=PairingFactory.getPairing("params/curves/a.properties");
 		Pairing pairing = pub.p;
 	
 		pub.g = pairing.getG1().newElement();

@@ -1,5 +1,6 @@
 package infobiz.wu.ac.at.sld.policytier.crypto;
 
+import infobiz.wu.ac.at.sld.policytier.IPolicyTier;
 import infobiz.wu.ac.at.sld.policytier.PolicyTier;
 import infobiz.wu.ac.at.sld.policytier.crypto.util.Bswabe;
 import infobiz.wu.ac.at.sld.policytier.crypto.util.BswabeCph;
@@ -17,12 +18,13 @@ import it.unisa.dia.gas.jpbc.Element;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-public class CPABE implements PolicyTier {
+public class CPABE extends PolicyTier {
 
-	/**
-	 * @param args
-	 * @author Junwei Wang(wakemecn@gmail.com)
-	 */
+@Override
+public void setup(){
+	setup(getKeyPath()+"pub.key",getKeyPath()+"master.key");
+}
+	
 	@Override
 	public void setup(String pubfile, String mskfile) {
 		byte[] pub_byte, msk_byte;
@@ -38,9 +40,13 @@ public class CPABE implements PolicyTier {
 		msk_byte = CPABESerializeUtils.serializeBswabeMsk(msk);
 		Common.writeFile(mskfile, msk_byte);
 	}
-
 	@Override
-	public void keygen(String pubfile, String prvfile, String mskfile, String attr_str) {
+	public void keygen(String attrKeyPath, String attributes){
+		keygen(getKeyPath()+"pub.key",getKeyPath()+"master.key",attrKeyPath,attributes);
+	}
+	
+	@Override
+	public void keygen(String pubfile, String mskfile, String prvfile, String attr_str) {
 		BswabePub pub;
 		BswabeMsk msk;
 		byte[] pub_byte, msk_byte, prv_byte;
@@ -66,6 +72,10 @@ public class CPABE implements PolicyTier {
 			e.printStackTrace();
 		}
 
+	}
+	@Override
+	public void encrypt(String policy, String queryKey, String encQueryKey){
+		encrypt(getKeyPath()+"/pub.key",policy,getInputPath()+queryKey,getOutputPath()+encQueryKey);
 	}
 
 	@Override
@@ -106,6 +116,10 @@ public class CPABE implements PolicyTier {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	@Override
+public void decrypt(String attrKeyPath, String encQueryKey, String decQueryKey){
+	decrypt(getKeyPath()+"/pub.key",attrKeyPath,getInputPath()+encQueryKey,getOutputPath()+decQueryKey);
 	}
 
 	@Override

@@ -7,9 +7,7 @@ import it.unisa.dia.gas.plaf.jpbc.util.ElementUtils;
 
 import java.util.Arrays;
 
-/**
- * @author Angelo De Caro (jpbclib@gmail.com)
- */
+
 public class FEEncryptionParameters extends IPLOSTW10KeyParameters {
 
     private FEPublicKeyParameters publicKey;

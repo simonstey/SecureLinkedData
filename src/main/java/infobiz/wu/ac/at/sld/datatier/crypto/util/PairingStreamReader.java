@@ -8,10 +8,7 @@ import it.unisa.dia.gas.plaf.jpbc.util.io.ExByteArrayInputStream;
 
 import java.io.DataInputStream;
 
-/**
- * @author Angelo De Caro (jpbclib@gmail.com)
- * @since 2.0.0
- */
+
 public class PairingStreamReader {
 
     private Pairing pairing;

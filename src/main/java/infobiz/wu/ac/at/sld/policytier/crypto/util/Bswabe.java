@@ -3,7 +3,9 @@ package infobiz.wu.ac.at.sld.policytier.crypto.util;
 import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.Pairing;
 import it.unisa.dia.gas.plaf.jpbc.pairing.PairingFactory;
+import it.unisa.dia.gas.plaf.jpbc.pairing.parameters.PropertiesParameters;
 
+import java.io.ByteArrayInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -28,16 +30,16 @@ public class Bswabe {
 	public static void setup(BswabePub pub, BswabeMsk msk) {
 		Element alpha, beta_inv;
 
-//		PropertiesParameters params = new PropertiesParameters()
-//				.load(new ByteArrayInputStream(curveParams.getBytes()));
-//
-//		pub.pairingDesc = curveParams;
-//		pub.p = PairingFactory.getPairing(params);
-//		Pairing pairing = pub.p;
+		PropertiesParameters params = new PropertiesParameters()
+				.load(new ByteArrayInputStream(curveParams.getBytes()));
+
+		pub.pairingDesc = curveParams;
+		pub.p = PairingFactory.getPairing(params);
+		Pairing pairing = pub.p;
 		
-		pub.pairingDesc=curveParams; 
-		pub.p=PairingFactory.getPairing("params/curves/a.properties");
-		Pairing pairing=pub.p;
+//		pub.pairingDesc=curveParams; 
+//		pub.p=PairingFactory.getPairing("params/curves/a.properties");
+//		Pairing pairing=pub.p;
 		
 		pub.g = pairing.getG1().newElement();
 		pub.f = pairing.getG1().newElement();

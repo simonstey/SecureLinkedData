@@ -10,10 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * @author Angelo De Caro (jpbclib@gmail.com)
- * @since 2.0.0
- */
+
 public class PairingStreamWriter {
 
     private ByteArrayOutputStream baos;

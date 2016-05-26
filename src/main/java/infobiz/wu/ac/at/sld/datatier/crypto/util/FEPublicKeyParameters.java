@@ -6,9 +6,7 @@ import it.unisa.dia.gas.jpbc.Element;
 import it.unisa.dia.gas.jpbc.ElementPowPreProcessing;
 import it.unisa.dia.gas.plaf.jpbc.util.ElementUtils;
 
-/**
- * @author Angelo De Caro (jpbclib@gmail.com)
- */
+
 public class FEPublicKeyParameters extends IPLOSTW10KeyParameters {
     private Element[] B;
     private ElementPowPreProcessing[] BPre;

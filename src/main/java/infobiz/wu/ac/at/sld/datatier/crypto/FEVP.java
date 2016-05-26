@@ -271,6 +271,9 @@ public class FEVP extends DataTier {
 
 		if (query[0] == null && query[1] == null && query[2] == null) {
 			privKey = loadQueryKey(queryKeyPath);
+			secretKeyMap.put(query[1],privKey);
+			encTriples.addAll(retrieveEncryptedTriples(query[0], query[1],
+					query[2]));
 		} else {
 
 			if (query[1].contains("|")) {
@@ -282,7 +285,7 @@ public class FEVP extends DataTier {
 							keyGen(keyPair.getPrivate(),
 									createPredicateVectorForQuery(
 											keyPair.getPrivate(), query[0], p,
-											query[2])));
+											query[2]),query));
 				}
 			} else {
 				encTriples.addAll(retrieveEncryptedTriples(query[0], query[1],
@@ -293,7 +296,7 @@ public class FEVP extends DataTier {
 						keyGen(keyPair.getPrivate(),
 								createPredicateVectorForQuery(
 										keyPair.getPrivate(), query[0],
-										query[1], query[2])));
+										query[1], query[2]),query));
 			}
 
 		}
