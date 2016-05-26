@@ -1,4 +1,4 @@
-# Secure Linked Data (SLD), Java Implementation. https://aic.ai.wu.ac.at/comcrypt/sld/
+# Secure Linked Data (SLD)
 
 ## Overview ##
 
@@ -16,9 +16,9 @@ Our protoype is licensed under the [GNU Lesser General Public License v3](https:
 
 ### Authors ###
 
-Simon Steyskal <simon.steyskal@wu.ac.at>
-Javier D. Fernandez <jfernand@wu.ac.at>
-Sabrina Kirrane <sabrina.kirrane@wu.ac.at>
+* Simon Steyskal <simon.steyskal@wu.ac.at>
+* Javier D. Fernandez <jfernand@wu.ac.at>
+* Sabrina Kirrane <sabrina.kirrane@wu.ac.at>
 
 ### Acknowledgements ###
 
