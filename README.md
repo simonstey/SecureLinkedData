@@ -1,7 +1,5 @@
 # Secure Linked Data (SLD)
 
-## Overview ##
-
 SLD represents a flexible and dynamic architecture for securely storing and maintaining RDF datasets. By employing a two-layered encryption strategy based on both Ciphertext-Policy Attribute-based Encryption (CP-ABE) and Functional Encryption (FE), we allow for fine-grained and revocable access control over encrypted RDF data based on arbitrary triple patterns. The proposed approach allows for the flexible enforcement of access control using triple patterns and at the same time reduces the overhead associated with querying encrypted data. Present repository contains a prototypical Java implementation of a **Policy Tier** and **Data Tier** which were used for conducting the experiments reported in our ISWC'16 submission.
 
 The encryption schemes used in our implementation are based on the Java Pairing Based Cryptography Library(jPBC): 
