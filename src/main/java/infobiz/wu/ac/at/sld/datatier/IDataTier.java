@@ -71,6 +71,11 @@ public interface IDataTier {
 
 	LinkedList<byte[]> retrieveEncryptedTriples(String s, String p, String o);
 
+	/**
+	 * 
+	 */
+	void run();
+
 
 
 

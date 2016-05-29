@@ -228,6 +228,26 @@ public abstract class DataTier implements IDataTier {
 			isFirstLoad = false;
 		}
 	}
+	
+	@Override
+	public void run(){
+		
+		this.setupDataStore();
+		
+		switch(getMethod()){
+		case "encrypt":
+			this.runEncryption();
+			break;
+		case "insert":
+			this.runEncryption();
+			break;
+		case "decrypt":
+			this.runDecryption(this.getDBAccess());
+			break;
+		default:
+			System.out.println("unknown method");
+		}
+	}
 
 	/*
 	 * (non-Javadoc)
