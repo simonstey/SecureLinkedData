@@ -4,6 +4,7 @@ SLD represents a flexible and dynamic architecture for securely storing and main
 
 The encryption schemes used in our implementation are based on the Java Pairing Based Cryptography Library(jPBC): 
    http://gas.dia.unisa.it/projects/jpbc/
+You need to add jpbc to your local maven repository in order to run SLD (see [jPBC Build How-To](http://gas.dia.unisa.it/projects/jpbc/buildHowto.html#.V0qc0r_mmiw) for more information).
 
 For more information on SLD, see the project homepage:
    https://aic.ai.wu.ac.at/comcrypt/sld/
