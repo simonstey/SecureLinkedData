@@ -1,6 +1,5 @@
 package infobiz.wu.ac.at.sld.policytier.crypto;
 
-import infobiz.wu.ac.at.sld.policytier.IPolicyTier;
 import infobiz.wu.ac.at.sld.policytier.PolicyTier;
 import infobiz.wu.ac.at.sld.policytier.crypto.util.Bswabe;
 import infobiz.wu.ac.at.sld.policytier.crypto.util.BswabeCph;

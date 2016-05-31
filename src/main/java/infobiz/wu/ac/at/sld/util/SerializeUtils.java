@@ -34,13 +34,13 @@ public class SerializeUtils {
 		byte[] e_byte;
 
 		len = unserializeUint32(arr, offset);
-		e_byte = new byte[(int) len];
+		e_byte = new byte[len];
 		offset += 4;
 		for (i = 0; i < len; i++)
 			e_byte[i] = arr[offset + i];
 		e.setFromBytes(e_byte);
 
-		return (int) (offset + len);
+		return offset + len;
 	}
 
 	public static void serializeString(ArrayList<Byte> arrlist, String s) {

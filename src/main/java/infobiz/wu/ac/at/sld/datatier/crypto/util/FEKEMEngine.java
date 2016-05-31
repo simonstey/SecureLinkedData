@@ -21,6 +21,7 @@ public class FEKEMEngine extends IPLOSTW10KEMEngine {
 	private int n;
 	private Pairing productPairing;
 
+	@Override
 	public void initialize() {
 		if (forEncryption) {
 			if (!(key instanceof FEEncryptionParameters))
@@ -40,6 +41,7 @@ public class FEKEMEngine extends IPLOSTW10KEMEngine {
 		this.outBytes = 2 * pairing.getGT().getLengthInBytes() + N * pairing.getG1().getLengthInBytes();
 	}
 
+	@Override
 	public byte[] process(byte[] in, int inOff, int inLen) {
 		if (key instanceof IPLOSTW10SecretKeyParameters) {
 			// Decrypt
@@ -69,7 +71,7 @@ public class FEKEMEngine extends IPLOSTW10KEMEngine {
 
 			// Encrypt the message under the specified attributes
 			FEEncryptionParameters encKey = (FEEncryptionParameters) key;
-			FEPublicKeyParameters pub = (FEPublicKeyParameters) encKey.getPublicKey();
+			FEPublicKeyParameters pub = encKey.getPublicKey();
 
 			Element delta1 = pairing.getZr().newRandomElement();
 			Element delta2 = pairing.getZr().newRandomElement();

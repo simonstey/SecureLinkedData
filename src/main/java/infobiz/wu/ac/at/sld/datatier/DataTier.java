@@ -232,7 +232,7 @@ public abstract class DataTier implements IDataTier {
 	@Override
 	public void run(){
 		
-		this.setupDataStore();
+		Storage store = this.setupDataStore();
 		
 		switch(getMethod()){
 		case "encrypt":
@@ -242,7 +242,7 @@ public abstract class DataTier implements IDataTier {
 			this.runEncryption();
 			break;
 		case "decrypt":
-			this.runDecryption(this.getDBAccess());
+			this.runDecryption(store);
 			break;
 		default:
 			System.out.println("unknown method");

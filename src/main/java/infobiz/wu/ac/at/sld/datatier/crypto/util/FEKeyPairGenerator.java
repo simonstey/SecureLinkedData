@@ -32,6 +32,7 @@ public class FEKeyPairGenerator extends IPLOSTW10KeyPairGenerator {
 
 		private IPLOSTW10KeyGenerationParameters param;
 
+		@Override
 		public void init(KeyGenerationParameters param) {
 			super.init(param);
 			this.param = (IPLOSTW10KeyGenerationParameters) param;

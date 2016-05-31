@@ -1,7 +1,5 @@
 package infobiz.wu.ac.at.sld.policytier;
 
-import java.io.File;
-
 public abstract class PolicyTier implements IPolicyTier {
 
 	public String policy;

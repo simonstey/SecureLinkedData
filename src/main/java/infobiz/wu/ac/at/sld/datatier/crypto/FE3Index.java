@@ -236,7 +236,7 @@ public class FE3Index extends DataTier {
 			final long start = i * portionSize;
 			final long end = Math.min(nrLoadedTriples, (i + 1) * portionSize);
 
-			executorService.submit(new EncryptionRunnable(start, end, triples, offset, this));
+			executorService.submit(new EncryptionRunnable(start, end, triples, offset, i, this));
 		}
 		executorService.shutdown();
 		try {
@@ -343,7 +343,7 @@ public class FE3Index extends DataTier {
 				final long start = i * portionSize;
 				final long end = Math.min(nrTriples, (i + 1) * portionSize);
 
-				futures.add(ecs.submit(new DecryptionCallable(start, end, encTriples, listOfKEMs, this)));
+				futures.add(ecs.submit(new DecryptionCallable(start, end, i, encTriples, listOfKEMs, this)));
 
 			}
 			for (int j = 0; j < finalPortions; ++j) {
@@ -366,14 +366,12 @@ public class FE3Index extends DataTier {
 
 		} finally {
 			executorService.shutdownNow();
-		}
-	
-		
+		}	
 
-		if (result != null) {
-
+		if (result != null && !result.isEmpty()) {
 			for (String s : result) {
-				sb.append(s.substring(1) + "\n");
+				if(s!=null)
+					sb.append(s.substring(1) + "\n");
 			}
 		}
 

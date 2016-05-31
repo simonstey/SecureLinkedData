@@ -222,7 +222,7 @@ public class FEVP extends DataTier {
 			final long end = Math.min(nrLoadedTriples, (i + 1) * portionSize);
 
 			executorService.submit(new EncryptionRunnable(start, end, triples,
-					offset, this));
+					offset, i, this));
 		}
 		executorService.shutdown();
 		try {
@@ -336,7 +336,7 @@ public class FEVP extends DataTier {
 				final long start = i * portionSize;
 				final long end = Math.min(nrTriples, (i + 1) * portionSize);
 
-				futures.add(ecs.submit(new DecryptionCallable(start, end,
+				futures.add(ecs.submit(new DecryptionCallable(start, end, i,
 						encTriples, listOfKEMs, this)));
 
 			}

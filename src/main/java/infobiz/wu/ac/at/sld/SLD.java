@@ -6,7 +6,6 @@ package infobiz.wu.ac.at.sld;
 import infobiz.wu.ac.at.sld.datatier.DataTier;
 import infobiz.wu.ac.at.sld.datatier.crypto.FE3Index;
 import infobiz.wu.ac.at.sld.datatier.crypto.FEVP;
-import infobiz.wu.ac.at.sld.datatier.db.Storage;
 import infobiz.wu.ac.at.sld.policytier.PolicyTier;
 import infobiz.wu.ac.at.sld.policytier.crypto.CPABE;
 
