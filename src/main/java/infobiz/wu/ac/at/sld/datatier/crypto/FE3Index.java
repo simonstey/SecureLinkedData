@@ -208,7 +208,7 @@ public class FE3Index extends DataTier {
 
 		Repository repo = dataStore.loadDatasetInStore(inputPath, storePath, isFirstLoad);
 		System.out.println("Finished loading triples");
-		LinkedList<Statement> triples = dataStore.extractAllStatements(repo);
+		LinkedList<Statement> triples = dataStore.extractAllStatements(repo,getNrTriples());
 		System.out.println("Extracted " + triples.size() + " triples");
 
 		int nrLoadedTriples = 0;
@@ -247,6 +247,7 @@ public class FE3Index extends DataTier {
 		}
 
 		DB db = dataStore.getDB();
+		System.out.println("going to commit");
 		db.commit();
 		db.close();
 

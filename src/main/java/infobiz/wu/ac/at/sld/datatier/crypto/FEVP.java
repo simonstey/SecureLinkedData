@@ -192,7 +192,7 @@ public class FEVP extends DataTier {
 		Repository repo = dataStore.loadDatasetInStore(inputPath, storePath,
 				isFirstLoad);
 		System.out.println("Finished loading triples");
-		LinkedList<Statement> triples = dataStore.extractAllStatements(repo);
+		LinkedList<Statement> triples = dataStore.extractAllStatements(repo,getNrTriples());
 		System.out.println("Extracted " + triples.size() + " triples");
 
 		int nrLoadedTriples = 0;
@@ -210,6 +210,8 @@ public class FEVP extends DataTier {
 
 		ExecutorService executorService = Executors
 				.newFixedThreadPool(nrThreads);
+		
+		System.out.println("nr Threads: "+nrThreads);
 
 		final int finalPortions = Math.min(portions, nrLoadedTriples);
 

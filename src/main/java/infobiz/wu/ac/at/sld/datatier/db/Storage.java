@@ -60,15 +60,24 @@ public abstract class Storage implements IStorage {
 	}
 
 	@Override
-	public LinkedList<Statement> extractAllStatements(Repository repo) {
+	public LinkedList<Statement> extractAllStatements(Repository repo, int nrTriples) {
 		RepositoryConnection con = repo.getConnection();
 		
 		RepositoryResult<Statement> triples = con.getStatements(null, null,
 				null, false);
 
-		LinkedList<Statement> statements = new LinkedList<org.openrdf.model.Statement>();
+		LinkedList<Statement> statements = new LinkedList<Statement>();
 		try {
-			Iterations.addAll(triples, statements);
+			System.out.println("triples to extract: "+nrTriples);
+			if(nrTriples == -1)
+				Iterations.addAll(triples, statements);
+			else {
+				int count = 0;
+				while(triples.hasNext() && count < nrTriples){
+					statements.add(triples.next());
+					count++;
+				}
+			}
 		} finally {
 			triples.close();
 			con.close();

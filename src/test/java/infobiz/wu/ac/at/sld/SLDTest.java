@@ -15,8 +15,8 @@ public class SLDTest {
 	public static void main(String[] args) {
 //		 runVPEncryption();
 ////		runVPDecryption();
-//		run3IEncryption();
-		run3IDecryption();
+		run3IEncryption();
+//		run3IDecryption();
 //		
 //		encryptQueryKey();
 //		decryptQueryKey();
@@ -31,7 +31,7 @@ public class SLDTest {
 				"data/lubm", // key path
 				"1", // number of hashing iterations
 				"data/lubm_diverse.nt", // input path
-				"data/lubmn.db", // output path
+				"data/lubm1.db", // output path
 				"data/lubm_store/", // triple store path
 				"false"); // is first load
 

@@ -11,8 +11,6 @@ public interface IStorage {
 
 	public Repository loadDatasetInStore(String datasetPath, String storePath, boolean isFirstLoad);
 	
-	public LinkedList<org.openrdf.model.Statement> extractAllStatements(Repository repo);
-	
 	public DB setupDB(String dbPath);
 	
 	public void setupMaps(DB db);
@@ -22,4 +20,6 @@ public interface IStorage {
 	public void persistCTTriple(byte[] id, Statement triple, byte[] ct, String method, int nrHashIterations);
 
 	Map<Object[], byte[]> getTriples(String s, String p, String o, int hashIterations);
+
+	LinkedList<Statement> extractAllStatements(Repository repo, int nrTriples);
 }
