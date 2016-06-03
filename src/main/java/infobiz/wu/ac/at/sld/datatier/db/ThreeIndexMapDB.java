@@ -107,6 +107,7 @@ public class ThreeIndexMapDB extends Storage {
 					// * * o query
 					lowerBound = new Object[] { oHash };
 					upperBound = new Object[] { oHash, null, null };
+		
 					return osMap.subMap(lowerBound, upperBound);
 				}
 			} else {

@@ -265,7 +265,7 @@ public class FE3Index extends DataTier {
 		// for (String prop : properties.keySet()) {
 		if (s.equals("*") && p.equals("*") && o.equals("*")) {
 			resultList = new LinkedList<byte[]>(dataStore3Index.getSPOMap().values());
-			
+
 			isAllStarQuery = true;
 		} else {
 			preResultList = new LinkedList<byte[]>(dataStore3Index.getTriples(s, p, o, nrHashIterations).values());
@@ -307,7 +307,6 @@ public class FE3Index extends DataTier {
 
 
 		}
-
 		LinkedList<byte[]> encTriples = retrieveEncryptedTriples(query[0], query[1], query[2]);
 
 		nrTriples = encTriples.size();

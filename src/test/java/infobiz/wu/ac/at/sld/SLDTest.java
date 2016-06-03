@@ -15,8 +15,8 @@ public class SLDTest {
 	public static void main(String[] args) {
 //		 runVPEncryption();
 ////		runVPDecryption();
-		run3IEncryption();
-//		run3IDecryption();
+//		run3IEncryption();
+		run3IDecryption();
 //		
 //		encryptQueryKey();
 //		decryptQueryKey();
@@ -56,7 +56,7 @@ public class SLDTest {
 		dataTier.initDummyDecParameters("decrypt", // method
 				"data/lubm", // key path
 				"1", // number of hashing iterations
-				"data/lubmn.db", // input path
+				"data/lubm1.db", // input path
 				"data/lubm.log", // output path
 				"*","*","*",
 //				"http://www.Department0.University0.edu/AssistantProfessor6", // queryS

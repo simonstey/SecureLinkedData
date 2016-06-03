@@ -37,8 +37,10 @@ public class EncryptionRunnable implements Runnable {
 			Statement triple = triples.get(toIntExact(j));
 			byte[] ct = FEScheme.encrypt(FEScheme.getMasterPublicKey(), triple);
 			byte[] id = Longs.toByteArray(offset+j);
-			storage.persistCTTriple(id, triple, ct, FEScheme.getMethod(), FEScheme.getNrHashIterations());
-			System.out.println("Thread "+portionNr+": "+(int)(((double)count/(double)size)*100)+"% finished ("+count+"/"+size+")");
+			storage.persistCTTriple(id, triple, ct, FEScheme.getMethod(), FEScheme.getNrHashIterations());	
+//			System.out.println("Thread "+portionNr+": "+(int)(((double)count/(double)size)*100)+"% finished ("+count+"/"+size+")");
+
 		}
+		System.out.println("Thread "+portionNr+": finished");
 	}
 }

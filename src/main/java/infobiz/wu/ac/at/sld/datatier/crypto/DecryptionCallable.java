@@ -49,8 +49,9 @@ public class DecryptionCallable implements Callable<List<String>> {
 				e.printStackTrace();
 			}
 			results.add(decodedTriple);
-			System.out.println("Thread "+portionNr+": "+(int)(((double)count/(double)size)*100)+"% finished ("+count+"/"+size+")");
+//			System.out.println("Thread "+portionNr+": "+(int)(((double)count/(double)size)*100)+"% finished ("+count+"/"+size+")");
 		}
+		System.out.println("Thread "+portionNr+": finished");
 		return results;
 	}
 
