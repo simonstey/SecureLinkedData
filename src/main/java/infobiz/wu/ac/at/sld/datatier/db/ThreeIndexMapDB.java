@@ -1,8 +1,12 @@
 package infobiz.wu.ac.at.sld.datatier.db;
 
 import infobiz.wu.ac.at.sld.datatier.db.util.IndexComparator;
+import infobiz.wu.ac.at.sld.datatier.db.util.ByteArrayWrapper;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentMap;
 
@@ -22,6 +26,156 @@ public class ThreeIndexMapDB extends Storage {
 	
 	public Repository loadDatasetInStore(String datasetPath, String storePath){
 		return loadDatasetInStore(datasetPath, storePath, false);
+	}
+	
+	public void getTriples(String s, String p, String o, int hashIterations,
+			HashMap<String, List<ByteArrayWrapper>> bindings) {
+
+		LinkedList<ByteArrayWrapper> sBindings = new LinkedList<ByteArrayWrapper>();
+		LinkedList<ByteArrayWrapper> pBindings = new LinkedList<ByteArrayWrapper>();
+		LinkedList<ByteArrayWrapper> oBindings = new LinkedList<ByteArrayWrapper>();
+
+		byte[] sHash = calculateHash(s.getBytes(), s, hashIterations);
+		byte[] pHash = calculateHash(p.getBytes(), p, hashIterations);
+		byte[] oHash = calculateHash(o.getBytes(), o, hashIterations);
+
+		Object[] lowerBound, upperBound;
+
+		if (s.startsWith("?")) {
+			if (p.startsWith("?")) {
+				if (o.startsWith("?")) {
+					// * * * query
+//					return spMap;
+				} else {
+					// * * o query
+					lowerBound = new Object[] { oHash };
+					upperBound = new Object[] { oHash, null, null };
+
+					for (Object[] objKey : osMap.subMap(lowerBound, upperBound).keySet()) {
+						sBindings.add(new ByteArrayWrapper((byte[]) objKey[1]));
+						pBindings.add(new ByteArrayWrapper((byte[]) objKey[2]));
+					}
+
+					if(bindings.containsKey(s))
+						bindings.get(s).retainAll(sBindings);
+					else
+						bindings.put(s, sBindings);
+
+					if(bindings.containsKey(p))
+						bindings.get(p).retainAll(pBindings);
+					else
+						bindings.put(p, pBindings);
+					
+				}
+			} else {
+				if (o.startsWith("?")) {
+					// * p * query
+					lowerBound = new Object[] { pHash };
+					upperBound = new Object[] { pHash, null, null };
+
+					for (Object[] objKey : poMap.subMap(lowerBound, upperBound).keySet()) {
+						sBindings.add(new ByteArrayWrapper((byte[]) objKey[2]));
+						oBindings.add(new ByteArrayWrapper((byte[]) objKey[1]));
+					}
+
+					
+					if(bindings.containsKey(s)){
+						bindings.get(s).retainAll(sBindings);
+					}
+					else{
+						bindings.put(s, sBindings);
+					}
+
+					if(bindings.containsKey(o))
+						bindings.get(o).retainAll(oBindings);
+					else
+						bindings.put(o, oBindings);
+
+//					return poMap.subMap(lowerBound, upperBound);
+				} else {
+					// * p o query
+					lowerBound = new Object[] { pHash, oHash };
+					upperBound = new Object[] { pHash, oHash, null };
+
+					for (Object[] objKey : poMap.subMap(lowerBound, upperBound).keySet()) {
+						sBindings.add(new ByteArrayWrapper((byte[]) objKey[2]));
+					}
+					
+					if(bindings.containsKey(s))
+						bindings.get(s).retainAll(sBindings);
+					else
+						bindings.put(s, sBindings);
+
+
+//					return poMap.subMap(lowerBound, upperBound);
+				}
+			}
+		} else {
+			if (p.startsWith("?")) {
+				if (o.startsWith("?")) {
+					// s * * query
+					lowerBound = new Object[] { sHash };
+					upperBound = new Object[] { sHash, null, null };
+
+					for (Object[] objKey : spMap.subMap(lowerBound, upperBound).keySet()) {
+						pBindings.add(new ByteArrayWrapper((byte[]) objKey[1]));
+						oBindings.add(new ByteArrayWrapper((byte[]) objKey[2]));
+					}
+
+
+					if(bindings.containsKey(p))
+						bindings.get(p).retainAll(pBindings);
+					else
+						bindings.put(p, pBindings);
+					
+					if(bindings.containsKey(o))
+						bindings.get(o).retainAll(oBindings);
+					else
+						bindings.put(o, oBindings);
+
+
+//					return spMap.subMap(lowerBound, upperBound);
+				} else {
+					// s * o query
+					lowerBound = new Object[] { oHash, sHash };
+					upperBound = new Object[] { oHash, sHash, null };
+
+					for (Object[] objKey : osMap.subMap(lowerBound, upperBound).keySet()) {
+						pBindings.add(new ByteArrayWrapper((byte[]) objKey[2]));
+					}
+
+					if(bindings.containsKey(p))
+						bindings.get(p).retainAll(pBindings);
+					else
+						bindings.put(p, pBindings);
+				
+
+//					return osMap.subMap(lowerBound, upperBound);
+				}
+			} else {
+				if (o.startsWith("?")) {
+					// s p * query
+					lowerBound = new Object[] { sHash, pHash };
+					upperBound = new Object[] { sHash, pHash, null };
+
+					for (Object[] objKey : spMap.subMap(lowerBound, upperBound).keySet()) {
+						oBindings.add(new ByteArrayWrapper((byte[]) objKey[2]));
+					}
+					
+					if(bindings.containsKey(o))
+						bindings.get(o).retainAll(oBindings);
+					else
+						bindings.put(o, oBindings);
+
+//					return spMap.subMap(lowerBound, upperBound);
+				} else {
+					// s p o query
+					lowerBound = new Object[] { sHash, pHash, oHash };
+//					return spMap.subMap(lowerBound, true, lowerBound, true);
+				}
+			}
+		}
+
 	}
 
 	@Override
