@@ -166,7 +166,7 @@ public class FEVP extends DataTier {
 				result[0] = pairing.getZr().newOneElement();
 				result[1] = sE;
 			}
-			if (p.equals("*")) {
+			if (o.equals("*")) {
 				result[2] = pairing.getZr().newZeroElement();
 				result[3] = pairing.getZr().newZeroElement();
 			} else {
